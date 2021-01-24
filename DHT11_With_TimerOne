@@ -1,0 +1,26 @@
+#include <TimerOne.h>
+#include <DHT.h>
+
+DHT dht(7, DHT11);
+
+void setup()
+{
+  Timer1.initialize(1000000);
+  Timer1.attachInterrupt(Timer1ISR);
+  Serial.begin(9600);
+  dht.begin();
+}
+
+void Timer1ISR()
+{
+  float h = dht.readHumidity(); 
+  float t = dht.readTemperature();
+  Serial.print(t);             
+  Serial.print(",");
+  Serial.print(h);
+  Serial.println();
+}
+
+void loop()
+{
+}
